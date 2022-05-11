@@ -256,3 +256,174 @@ When you use the Node or browser console REPL, you type **expressions** at the `
 Inexperienced JavaScript programmers are often confused with the difference between returning a value and printing or displaying it. When we invoke the `console.log` method, we're telling JavaScript to write something to the console. In Node, that is your screen; in your browser, it's the Console in your Developer Tools application. The term **log** is a synonym for printing or displaying something on the console.
 
 ## Statements ##
+
+JavaScript also has **statements**. You can find a complete list of statements on [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements). Statements often include expressions as part of their syntax, but the statement itself is not an expression -- its value cannot be captured and reused later in your code.
+
+An example of a JavaScript statement is the variable declaration:
+`> let foo = 3;`
+
+The key difference between a statement and an expression is that you can't capture a value from a statement.
+
+### Statements in Practice ###
+
+> a **statement** is a line of code commanding a task. Every program consists of a sequence of statements.
+
+By this definition, every chunk of code that can be treated as a single unit is a statement. This includes:
+
+- variable, function, and class declarations
+- loops and `if`statements
+- `return`and `break` statements
+- assignments: `a = 3`;
+- standalone expressions: `console.log("Hello");`
+
+The chief difference between this latter definition and the language specification is it includes assignments and function calls as statements, while the language specification does not. Most developers use the term "statement" in the broader sense: any syntactic unit of code that expresses an action for the computer to perform.
+
+## Exercises ##
+
+1. Concatenate two or more strings, one with your first name and one with your last, to create a string with your full name as its value. For example, if your name is John Doe, think about how you can put `'John'` and `'Doe'` together to get `'John Doe'.`
+
+```js
+let firstName = 'Kurt';
+let lastName = 'Kerns';
+
+fullName = firstName + ' ' + lastName
+
+console.log(fullName)
+```
+
+2. Use the arithmetic operators to determine the individual digits of a 4-digit number like `4936`:
+
+```js
+let number = 4396;
+let ones = number % 10
+
+console.log(ones)
+
+number = (number - ones) / 10
+
+console.log(number)
+
+let tens = number % 10
+
+console.log(tens)
+
+number = (number - tens) / 10
+
+console.log(number)
+
+let hundreds = number % 10
+
+console.log(hundreds)
+
+let thousands = (number - hundreds) / 10
+
+console.log(thousands)
+```
+
+4. Why does this code log `'510'` instead of `15`
+
+```js
+console.log('5' + 10);
+// javascript implicitly concatenates strings and coerces the number into a string
+```
+
+5. Use explicit coercion so it logs `15` instead.
+
+```js
+console.log(Number('5') + 10);
+// = 15
+
+// OR
+console.log(parseInt('5', 10) + 10); // =15
+console.log(parseInt('5') + 10);     // =15
+```
+
+6. Use the template literal syntax along with the expression `Number('5') + 10` to log the following sentence to the console:
+`The value of 5 + 10 is 15.`
+
+```js
+let value = `The value of 5 + 10 is ${Number('5') + 10}.`;
+
+console.log(value);
+```
+
+7. Will an error occur if you try to access an array element with an index that is greater than or equal to the length of the array? For example:
+
+```js
+let foo = ['a', 'b', 'c'];
+console.log(foo.length);  // => 3
+console.log(foo[3]);      // will this result in an error?
+```
+
+*There won't be an error. When we use an out-of-bound index, JavaScript returns `undefined` so line 3 logs and returns `undefined` to the console.*
+
+8. Create an array named names that contains a list of pet names. For instance:
+
+| **Name** |
+| -------- |
+| asta |
+| butterscotch |
+| pudding |
+| neptune |
+| darwin |
+
+```js
+let names = [
+  'asta',
+  'butterscotch',
+  'pudding',
+  'neptune',
+  'darwin',
+];
+names; // [ 'asta', 'butterscotch', 'pudding', 'neptune', 'darwin' ]
+```
+
+9. Create an object named `pets` that contains a list of pet names and the type of animal. For instance:
+
+| **Name** | **Animal** |
+| -------- | ---------- |
+| asta | dog |
+| butterscotch | cat |
+| pudding | cat |
+| neptune | fish |
+| darwin | lizard |
+
+```js
+// Multiline
+let pets = {
+  asta:         'dog',
+  butterscotch: 'cat',
+  pudding:      'cat',
+  neptune:      'fish',
+  darwin:       'lizard', // The comma on this line is optional
+};
+
+// Single line
+let pets = { asta: 'dog', butterscotch: 'cat', pudding: 'cat', neptune: 'fish', darwin: 'lizard' };
+```
+
+10. What value does the following expression evaluate to?
+
+```js
+'foo' === 'Foo'
+```
+
+*This evaluates to `false` because case matters when comparing strings.*
+
+11. What value does the following expression evaluate to?
+
+```js
+parseInt('3.1415') // = 3
+```
+
+*`parseInt`converts strings that begin with a digit to their numeric equivalent. If it encounters a non-digit such as `.`, it stops converting. Thus, this example converts the `3` at the beginning of the string but ignores everything else.*
+
+12. What value does the following expression evaluate to?
+
+```js
+'12' < '9'
+```
+
+*This evaluates to `true` since it is comparing strings, so it starts with `'1' < '9'`, so `'12'` must be less than `'9'`.*
+
+If we used numbers instead, it would evaluate to false.
