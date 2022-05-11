@@ -108,4 +108,26 @@ Make sure to always declare your variables and constants wit `let` and `const`.
 
 ## Exercises ##
 
-1.
+1. Write a program named `greeter.js` that greets `'Victor'` three times. Your program should use a variable and not hard code the string value 'Victor' in each greeting. Here's an example run of the program:
+
+```
+$ node greeter.js
+Good Morning, Victor.
+Good Afternoon, Victor.
+Good Evening, Victor.
+```
+
+```js
+let name = 'Victor'
+
+let timeOfDay = [
+  'Morning',
+  'Afternoon',
+  'Evening',
+]
+
+console.log(`Good ${timeOfDay[0]}, ${name}.`)
+console.log(`Good ${timeOfDay[1]}, ${name}.`)
+console.log(`Good ${timeOfDay[2]}, ${name}.`)
+
+```
