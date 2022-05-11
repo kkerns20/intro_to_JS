@@ -118,16 +118,59 @@ Good Evening, Victor.
 ```
 
 ```js
-let name = 'Victor'
+let name = 'Victor';
 
 let timeOfDay = [
   'Morning',
   'Afternoon',
   'Evening',
-]
+];
 
-console.log(`Good ${timeOfDay[0]}, ${name}.`)
-console.log(`Good ${timeOfDay[1]}, ${name}.`)
-console.log(`Good ${timeOfDay[2]}, ${name}.`)
+console.log(`Good ${timeOfDay[0]}, ${name}.`);
+console.log(`Good ${timeOfDay[1]}, ${name}.`);
+console.log(`Good ${timeOfDay[2]}, ${name}.`);
 
 ```
+
+2. Write a program named age.js that includes someone's age and then calculates and reports the future age in 10, 20, 30 and 40 years. Below is the output for someone 20 years old.
+
+```
+You are 20 years old.
+In 10 years, you will be 30 years old.
+In 20 years, you will be 40 years old.
+In 30 years, you will be 50 years old.
+In 40 years, you will be 60 years old.
+```
+
+```js
+let age = 20;
+console.log('You are ' + age + ' years old.');
+console.log(`In 10 years, you will be ${age + 10} years old.`);
+console.log(`In 20 years, you will be ${age + 20} years old.`);
+console.log(`In 30 years, you will be ${age + 30} years old.`);
+console.log(`In 40 years, you will be ${age + 40} years old.`);
+```
+
+3. What happens when you run the following program? Why do we get that result?
+
+```js
+{
+  let foo = 'bar';
+}
+
+console.log(foo);
+```
+
+The `let` statement creates variables with block scope, which limits the visibility of the variable to the block. `foo` doesn't exist outside of the block
+
+```
+> {
+...   let foo = 'bar';
+... }
+undefined
+> 
+> console.log(foo);
+Uncaught ReferenceError: foo is not defined
+```
+
+4. What happens when you run the following code? Why?
