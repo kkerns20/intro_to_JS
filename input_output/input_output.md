@@ -1,4 +1,4 @@
-# Input/Output #
+# [Input/Output](https://launchschool.com/books/javascript/read/input_output) #
 
 ## read-line ##
 
