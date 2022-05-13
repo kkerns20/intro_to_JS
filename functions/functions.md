@@ -210,3 +210,5 @@ That's much shorter! Note the lack of a `return` statement. We can omit it in ar
 ## [The Call Stack](https://launchschool.com/books/javascript/read/functions#callstack) ##
 
 The **call stack** helps JavaScript keep track of what function is executing as well as where execution should resume when the function returns.
+
+Need more notes over call stack
