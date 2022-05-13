@@ -211,4 +211,75 @@ That's much shorter! Note the lack of a `return` statement. We can omit it in ar
 
 The **call stack** helps JavaScript keep track of what function is executing as well as where execution should resume when the function returns.
 
-Need more notes over call stack
+> The call stack has a limited size that varies based on the JavaScript implementation. That size is usually sufficient for more than 10000 stack entries. If the stack runs out of room, you will see a `RangeError` exception together with a message that mentions the stack.
+
+## Summary ##
+
+Functions and methods are fundamental concepts in JavaScript programming. Knowing what a function does is crucial to your development as a JavaScript programmer. You'll use them all the time, in programs both big and small.
+
+Understanding variable scope is essential towards becoming fluent with JavaScript. Function composition is something you'll use often, and understanding mutation helps you catch and avoid an entire class of bugs. There are multiple ways to declare functions: function declarations, function expressions, and arrow functions.
+
+## Exercises ##
+
+1. What does this code log to the console? Does executing the foo function affect the output? Why or why not?
+
+```js
+let bar = 1;
+function foo() {
+  let bar = 2;
+}
+
+foo();
+console.log(bar); // => 1
+// foo doesn't affec thet value assigned to bar since JS functions 
+// create an inner scope.
+
+// compared to this one, foo here changes the global variable to 2
+let bar = 1;
+function foo() {
+  bar = 2;
+}
+
+foo();
+console.log(bar);
+```
+
+2. Add a function program to `greeter.js` that solicits the user's first and last names in separate invocations and logs the resultant full name to the console
+
+```js
+function getName(prompt) {
+  let readlineSync = require('readline-sync');
+  let name = readlineSync.question(prompt);
+  return name;
+}
+
+let firstName = getName('What is your first name? ');
+let lastName = getName('What is your last name? ');
+console.log(`Hello, ${firstName} ${lastName}!`);
+```
+
+4. What does the following code log to the console?
+
+```js
+function scream(words) {
+  words = words + '!!!!';
+  return;
+  console.log(words);
+}
+
+scream('Yipeee');
+```
+
+It won't log anything because `return` terminates the function before it can log anything.
+
+5. What does the following code log to the console?
+
+```js
+function scream(words) {
+  return words + '!!!!';
+}
+
+scream('Yipeee'); 
+```
+
+This program also doesn't log anything. It returns a value `Yipeee!!!!` but it doesn't do anything with it. In particular, it doesn't write anything to the console.
