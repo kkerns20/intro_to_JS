@@ -408,3 +408,87 @@ The &`&` and `||` logical operators, as you'll recall, use short-circuit evaluat
 > !!''   // '' is falsy, !'' is true, !true is false
 = false
 ```
+
+## Operator Precedence ##
+
+Use parentheses
+
+## The Ternary Operator ##
+
+similar to Ruby
+
+## Switch Statement ##
+
+A `switch` statement is simiilar to an `if` statement but it has a different interface. It compares a single value against multiple values for strict equality (as with the `===` operator), where as `if` can test multiple expression with any condition.
+
+`switch statements use the reserved words`switch`,`case`,`default`, and`break`.
+
+```js
+// switch.js
+let a = 5;
+
+switch (a) {
+  case 5:
+    console.log('a is 5');
+    break;
+  case 6:
+    console.log('a is 6');
+    break;
+  default:
+    console.log('a is neither 5, nor 6');
+    break;
+} // => a is 5
+
+// This example is functionally identical to the following if/else statement
+
+let a = 5;
+
+if (a === 5) {
+  console.log('a is 5');
+} else if (a === 6) {
+  console.log('a is 6');
+} else {
+  console.log('a is neither 5, nor 6');
+} // => a is 5
+```
+
+The `break` statement in each `case` is crucial. Without a break, execution "falls through" to the next `case` clasue.
+
+```js
+let a = 5;
+
+switch (a) {
+  case 5:
+    console.log('a is 5');
+  case 6:
+    console.log('a is 6');
+  default:
+    console.log('a is neither 5, nor 6');
+} // => a is 5
+  //    a is 6
+  //    a is neither 5, nor 6
+```
+
+This doesn't mean that falling through is a completely undesirable behavior...
+
+```js
+let a = 5;
+
+switch (a) {
+  case 5:
+  case 6:
+  case 7:
+    // executed if a is 5, 6, or 7
+    console.log("a is either 5, 6, or 7")
+    break;
+  case 8:
+  case 9:
+    // executed if a is 8 or 9
+    console.log('a is 8 or 9');
+    break;
+  default:
+    // executed if a is anything else
+    console.log('a is not 5, 6, 7, 8, or 9');
+    break;
+}
+```
