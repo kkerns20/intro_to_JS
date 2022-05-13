@@ -492,3 +492,146 @@ switch (a) {
     break;
 }
 ```
+
+## Exercises ##
+
+1. What values do the following expressions evaluate to?
+
+```js
+false || (true && false); // false
+true || (1 + 2); // true, short-circuited
+(1 + 2) || true; // 3, short-circuited
+true && (1 + 2); // 3
+false && (1 + 2); // false, short-circuited
+(1 + 2) && true; // true
+(32 * 4) >= 129; // false => 128 < 129
+false !== !true; // false
+true === 4; // false
+false === (847 === '847'); // true
+false === (847 == '847'); // false
+(!true || (!(100 / 5) === 20) || ((328 / 4) === 82)) || false; // true
+```
+
+2. Write a function, `evenOrOdd`, that determines whether its argument is an even number. If it is, the function should log `'even'` to the console; otherwise, it should log `'odd'`. For now, assume that the argument is always an integer.
+
+```js
+function evenOrOdd(number) {
+  if (number % 2 === 0) {
+    console.log('even');
+  } else {
+    console.log('odd');
+  }
+}
+
+evenOrOdd(3);
+evenOrOdd(4);
+evenOrOdd(7);
+```
+
+3. Let's improve our previous implementation of `evenOrOdd`. Add a validation check to ensure that the argument is an integer. If it isn't, the function should issue an error message and return.
+
+```js
+function evenOrOdd(number) {
+  if (!Number.isInteger(number)) {
+    console.log('Sorry, the value you passed is not an integer');
+    return;
+  }
+
+  if (number % 2 === 0) {
+    console.log('even');
+  } else {
+    console.log('odd');
+  }
+}
+
+evenOrOdd(3)
+evenOrOdd(4)
+evenOrOdd(7.1)
+```
+
+4. What does the following code log to the console, and why?
+
+```js
+function barCodeScanner(serial) {
+  switch (serial) {
+    case '123':
+      console.log('Product1');
+    case '113':
+      console.log('Product2');
+    case '142':
+      console.log('Product3');
+    default:
+      console.log('Product not found!');
+  }
+}
+
+barCodeScanner('113');
+```
+
+Since this switch lacks a break statement, it will log each case
+
+5. Refactor this statemetn to use an `if` statement instead:
+
+```js
+return foo() ? 'bar' : qux();
+
+if (foo()) {
+  return 'bar';
+} else {
+  return qux();
+}
+```
+
+6. What does this code output to the console?
+
+```js
+function isArrayEmpty(arr) {
+  if (arr) {
+    console.log('Not Empty');
+  } else {
+    console.log('Empty');
+  }
+}
+
+isArrayEmpty([]); // an empty array evaluates to true, so 'not empty'
+```
+
+7. Write a function that takes a string as an argument and returns an all-caps version of the string when the string is longer than 10 characters. Otherwise, it should return the original string. Example: change `'hello world'` to `'HELLO WORLD'`, but don't change `'goodbye'`.
+
+```js
+function longerThanTenChars(str) {
+  if (str.length > 10) {
+    return str.toUpperCase();
+  } else {
+    return str;
+  }
+}
+
+function capsLong(string) {
+  return ((string.length > 10) ? string.toUpperCase() : string);
+}
+
+longerThanTenChars('Hello World') // 'HELLO WORLD'
+longerThanTenChars('goodbye')     // 'goodbye'
+```
+
+8. Write a function that logs whether a number is between 0 and 50 (inclusive), between 51 and 100 (inclusive), greater than 100, or less than 0.
+
+```js
+function numberRange(number) {
+  if (number < 0) {
+    console.log(`${number} is less than 0`);
+  } else if (number <= 50) {
+    console.log(`${number} is between 0 and 50`);
+  } else if (number <= 100) {
+    console.log(`${number} is between 50 and 100`);
+  } else {
+    console.log(`${number} is greater than 100`);
+  }
+}
+
+numberRange(25);  // 25 is between 0 and 50
+numberRange(75);  // 75 is between 51 and 100
+numberRange(125); // 125 is greater than 100
+numberRange(-25); // -25 is less than 0
+```
