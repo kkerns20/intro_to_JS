@@ -1,0 +1,23 @@
+{
+  "name": "intro_to_js",
+  "version": "1.0.0",
+  "description": "My work through Launch School's \"Intro to Programming with JavaScript\"",
+  "main": "example.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kkerns20/intro_to_JS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kkerns20/intro_to_JS/issues"
+  },
+  "homepage": "https://github.com/kkerns20/intro_to_JS#readme",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}
