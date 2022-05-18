@@ -267,30 +267,77 @@ console.log(arraysEqual([1, 2, 3], [1, 2, 3, 4])); // => false
 
 ### `includes` ###
 
+Determines whether an array contains a certain element.
+
+> Internally, `includes` uses `===` to compare elements of the array with the argument. That means we can't use `includes` to check for the existence of a nested array or an object unless we have the same object or array we're looking for:
+
+```js
+> let inner = [3, 4];
+> let a = [1, 2, inner, 5]
+
+> a.includes([3, 4])
+= false
+
+> a.includes(inner)
+= true
+```
+
 ### `sort` ###
+
+A destructive method that mutates the caller. It will rearrange the elements of an array in sequence.
 
 ### `slice` ###
 
+Extracts a portion of the array. It takes two optional arguments: the first is the index at which extraction begins, the second is where extraction extends but excluding that index:
+
+```js
+> let fruits = ['mango', 'orange', 'banana', 'pear', 'apple']
+> fruits.slice(1, 3)
+= [ 'orange', 'banana' ]
+
+> fruits.slice(2) // second argument defaults to rest of array
+= [ 'banana', 'pear', 'apple' ]
+
+> fruits.slice() // no arguments duplicates the array
+= [ 'mango', 'orange', 'banana', 'pear', 'apple' ]
+```
+
+Calling `slice` without any arguments is a great way to copy an array, as seen above.
+
 ### `reverse` ###
+
+A destructive method that mutates the caller. It reverses the order of an array. Used with `slice` above, both can be used without mutation.
+
+```js
+> let numbers = [1, 2, 3, 4]
+> let copyOfNumbers = numbers.slice();
+> let reversedNumbers = copyOfNumbers.reverse()
+> reversedNumbers
+= [ 4, 3, 2, 1 ]
+
+> numbers
+= [ 1, 2, 3, 4 ]
+```
 
 ## Exercises ##
 
 1. In the following code, what are the final `length`values for `array1`, `array2`, `array3`, `array4`, and `array5`?
 
 ```js
-let array1 = [1, 2, undefined, 4];
+let array1 = [1, 2, undefined, 4]; // length 4
 
 let array2 = [1];
-array2.length = 5;
+array2.length = 5; // length 5, you can set length, and you'll have 4 gaps at the end 
 
 let array3 = [];
-array3[-1] = [1];
+array3[-1] = [1]; //length is 0. Index positions must be non-negative integers starting from `0`. 
+// Negative and non-integer indexes don't get taken into account when determining length
 
 let array4 = [1, 2, 3, 4, 5];
-array4.length = 3;
+array4.length = 3; // length 3 because it's truncated
 
 let array5 = [];
-array5[100] = 3;
+array5[100] = 3; //length 101
 ```
 
 2. Log all of the even values from `myArray` to the console.
@@ -298,6 +345,21 @@ array5[100] = 3;
 ```js
 let myArray = [1, 3, 6, 11, 4, 2,
                4, 9, 17, 16, 0];
+               
+for (let i = 0; i < myArray.length; i += 1) {
+  let value = myArray[i];
+  if (value % 2 === 0) {
+    console.log(value);
+  }
+}
+
+// OR
+
+myArray.forEach(function(value) {
+  if (value % 2 === 0) {
+    console.log(value);
+  }
+});
 ```
 
 3. Let's make the problem a little harder. In this problem, we're again interested in even numbers, but this time the numbers are in nested arrays in a single outer array.
@@ -308,6 +370,26 @@ let myArray = [
   [4, 2, 4],
   [9, 17, 16, 0],
 ];
+
+
+for (let i = 0; i < myArray.length; i += 1) {
+  for (let j = 0; j < myArray[i].length; j += 1) {
+    let value = myArray[i][j];
+    if (value % 2 === 0) {
+      console.log(value);
+    }
+  }
+}
+
+// OR
+
+myArray.forEach(function(nestedArray) {
+  nestedArray.forEach(function(value) {
+    if (value % 2 === 0) {
+      console.log(value);
+    }
+  });
+});
 ```
 
 4. Let's try another variation on the even-numbers theme.
@@ -320,6 +402,26 @@ let myArray = [
   4, 2, 4, 9,
   17, 16, 0,
 ];
+
+let newArray = myArray.map(function(value) {
+  if (value % 2 === 0) {
+    return 'even';
+  } else {
+    return 'odd';
+  }
+});
+
+// Or with a for loop
+
+let newArray = [];
+for (let i = 0; i < myArray.length; i += 1) {
+  let value = myArray[i];
+  if (value % 2 === 0) {
+    newArray.push('even');
+  } else {
+    newArray.push('odd');
+  }
+}
 ```
 
 5. Write a `findIntegers` function that takes an array argument and returns an array that contains only the integers from the input array. Use the `filter` method in your function.
@@ -329,6 +431,11 @@ let things = [1, 'a', '1', 3, NaN, 3.1415, -4, null, false];
 let integers = findIntegers(things);
 console.log(integers); // => [1, 3, -4]
  
+function findIntegers(array) {
+  return array.filter(function(element) {
+    return Number.isInteger(element);
+  });
+}
 ```
 
 6. Use `map` and `filter` to first determine the lengths of all the elements in an array of string values, then discard the even values (keep the odd values).
@@ -336,11 +443,29 @@ console.log(integers); // => [1, 3, -4]
 ```js
 let arr = ['a', 'abcd', 'abcde', 'abc', 'ab'];
 console.log(oddLengths(arr)); // => [1, 5, 3]
+
+function oddLengths(strings) {
+  let lengths = strings.map((letters) => letters.length);
+  let oddLengths = lengths.filter((number) => number % 2 === 1);
+  return oddLengths;
+}
+
+let arr = ['a', 'abcd', 'abcde', 'abc', 'ab'];
+console.log(oddLengths(arr));
 ```
 
 7. Use `reduce` to compute the sum of the squares of all of the numbers in an array:
 
 ```js
+let array = [3, 5, 7];
+console.log(sumOfSquares(array)); // => 83
+
+function sumOfSquares(numbers) {
+  return numbers.reduce((accumulator, number) => {
+    return accumulator + number * number;
+  }, 0);
+}
+
 let array = [3, 5, 7];
 console.log(sumOfSquares(array)); // => 83
 ```
@@ -352,6 +477,20 @@ Write a function similar to the `oddLengths` function from Exercise 6, but don't
 ```js
 let arr = ['a', 'abcd', 'abcde', 'abc', 'ab'];
 console.log(oddLengths(arr)); // => [1, 5, 3]
+
+function oddLengths(strings) {
+  return strings.reduce((filteredNumbersArray, letters) => {
+    let length = letters.length;
+    if (length % 2 === 1) {
+      filteredNumbersArray.push(length);
+    }
+
+    return filteredNumbersArray;
+  }, []);
+}
+
+let arr = ['a', 'abcd', 'abcde', 'abc', 'ab'];
+console.log(oddLengths(arr));
 ```
 
 9. Without using a `for`, `while`, or `do/while` loop, write some code that checks whether the number `3` appears inside these arrays:
@@ -360,6 +499,15 @@ console.log(oddLengths(arr)); // => [1, 5, 3]
 let numbers1 = [1, 3, 5, 7, 9, 11];
 let numbers2 = [];
 let numbers3 = [2, 4, 6, 8];
+
+> numbers1.includes(3);
+= true
+
+> numbers2.includes(3);
+= false
+
+> numbers3.includes(3);
+= false
 ```
 
 Return `true` or `false` depending on each result.
@@ -372,6 +520,8 @@ let arr = [
   ["example", "mem", null, 6, 88],
   [4, 8, 12]
 ];
+
+> arr[1][3] = 606;
 ```
 
 You don't have to search the array. Just write an assignment that replaces the `6`.
