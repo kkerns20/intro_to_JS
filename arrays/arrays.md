@@ -263,7 +263,7 @@ console.log(arraysEqual([1, 2, 3], [1, 2, 3, 4])); // => false
 
 `arraysEqual` works best when all elements in both arrays are primitive values. If any pair of elements has a non-primitive value (an array or object), `arraysEqual` might not return the result you expect:
 
-## Other Array Methods ##
+## Other [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) Methods ##
 
 ### `includes` ###
 
