@@ -238,3 +238,27 @@ array.forEach(num => console.log(num)); // more compact
 > c[0] === undefined;
 = true
 ```
+
+## Array Equality ##
+
+JavaScript treats two arrays as equal only when they are the same array: they must occupy the same spot in memory. This rule holds for JavaScript objects in general; objects must be the same object.
+
+```js
+function arraysEqual(arr1, arr2) {
+  if (arr1.length !== arr2.length) return false;
+
+  for (let i = 0; i < arr1.length; i += 1) {
+    if (arr1[i] !== arr2[i]) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+console.log(arraysEqual([1, 2, 3], [1, 2, 3]));    // => true
+console.log(arraysEqual([1, 2, 3], [4, 5, 6]));    // => false
+console.log(arraysEqual([1, 2, 3], [1, 2, 3, 4])); // => false
+```
+
+`arraysEqual` works best when all elements in both arrays are primitive values. If any pair of elements has a non-primitive value (an array or object), `arraysEqual` might not return the result you expect:
